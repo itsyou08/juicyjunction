@@ -4,9 +4,11 @@
     <title>Payment</title>
     <style>
         body {
-    margin: 0;
-    padding: 0;
-}
+            margin: 0;
+            padding: 0;
+            font-size: 16px; /* Set a base font size for better responsiveness */
+        }
+
         .video-background {
             position: fixed;
             top: 0;
@@ -23,25 +25,22 @@
             object-fit: cover;
         }
 
-         /* Apply a CSS zoom-in animation to the page */
-    .zoom-in-page {
-        animation: zoomIn 1s ease forwards;
-        opacity: 0; /* Initially, set the opacity to 0 to make the page invisible */
-    }
-
-    /* Define the zoom-in animation */
-    @keyframes zoomIn {
-        0% {
-            transform: scale(0); /* Start with zero scale (invisible) */
+        .zoom-in-page {
+            animation: zoomIn 1s ease forwards;
             opacity: 0;
         }
-        100% {
-            transform: scale(1); /* End with the original scale (visible) */
-            opacity: 1;
-        }
-    }
 
-        /* Payment form styles */
+        @keyframes zoomIn {
+            0% {
+                transform: scale(0);
+                opacity: 0;
+            }
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
         .payment-form {
             background: transparent;
             padding: 20px;
@@ -135,6 +134,19 @@
             margin: 0 auto;
         }
 
+        .payment-form h2,
+        .payment-form h3,
+        .order-summary,
+        #delivery-form,
+        .payment-methods,
+        .promo-code,
+        .total-amount,
+        .payment-confirmation,
+        .terms-and-conditions,
+        #typing-submit-button {
+            margin-bottom: 60px;
+        }
+
         .payment-form h2 {
             font-size: 1.5rem;
             color: #fff;
@@ -144,13 +156,7 @@
         .order-summary ul {
             font-size: 0.9rem;
             color: #fff;
-             font-family: "Century Gothic", Arial, sans-serif;
-        }
-
-        @media screen and (max-width: 768px) {
-            .payment-form {
-                padding: 10px;
-            }
+            font-family: "Century Gothic", Arial, sans-serif;
         }
 
         .input-container {
@@ -160,189 +166,199 @@
         }
 
         .input-container div {
-            flex: 0 0 calc(48% - 5px);
+            flex: 0 0 100%;
             margin-bottom: 10px;
         }
 
         .input-container label {
             flex: 0 0 100%;
         }
+
+        @media screen and (min-width: 768px) {
+            .payment-form {
+                max-width: 100%;
+            }
+
+            .input-container div {
+                flex: 0 0 calc(48% - 5px);
+            }
+        }
     </style>
 </head>
 <body>
-<div class="zoom-in-page">
-    <div class="video-background">
-        <video class="intro" muted>
-            <source src="background/intro.mp4" type="video/mp4"/>
-        </video>
-        <video class="intro-loop" muted>
-            <source src="background/loop.mp4" type="video/mp4"/>
-        </video>
-    </div>
-<div class="content-container">
-    <div class="payment-form">
-        <h2 id="typing-heading"></h2>
-
-        <h3 id="typing-order-summary"></h3>
-        <div class="order-summary">
-            <ul>
-                <li>Dish 1 - Quantity: 2 - Price: ₱10.00</li>
-                <li>Dish 2 - Quantity: 1 - Price: ₱7.50</li>
-            </ul>
+    <div class="zoom-in-page">
+        <div class="video-background">
+            <video class="intro" muted>
+                <source src="background/intro.mp4" type="video/mp4"/>
+            </video>
+            <video class="intro-loop" muted>
+                <source src="background/loop.mp4" type="video/mp4"/>
+            </video>
         </div>
+        <div class="content-container">
+            <div class="payment-form">
+                <h2 id="typing-heading"></h2>
 
-        <form id="delivery-form">
-            <h3 id="typing-delivery-info"></h3>
-            <div class="input-container">
-                <div>
-                    <label for="name">Name:</label>
-                    <input type="text" id="name" name="name" required>
+                <h3 id="typing-order-summary"></h3>
+                <div class="order-summary">
+                    <ul>
+                        <li>Dish 1 - Quantity: 2 - Price: ₱10.00</li>
+                        <li>Dish 2 - Quantity: 1 - Price: ₱7.50</li>
+                    </ul>
                 </div>
-                <div>
-                    <label for="address">Address:</label>
-                    <input type="text" id="address" name="address" required>
+
+                <form id="delivery-form">
+                    <h3 id="typing-delivery-info"></h3>
+                    <div class="input-container">
+                        <div>
+                            <label for="name">Name:</label>
+                            <input type="text" id="name" name="name" required>
+                        </div>
+                        <div>
+                            <label for="address">Address:</label>
+                            <input type="text" id="address" name="address" required>
+                        </div>
+                        <div>
+                            <label for="contact">Contact Number:</label>
+                            <input type="tel" id="contact" name="contact" required>
+                        </div>
+                        <div>
+                            <label for="delivery-notes">Delivery Notes:</label>
+                            <textarea id="delivery-notes" name="delivery-notes"></textarea>
+                        </div>
+                    </div>
+                </form>
+
+                <h3 id="typing-payment-methods"></h3>
+                <div class="payment-methods">
+                    <label for="credit-card">Credit/Debit Card</label>
+                    <input type="radio" id="credit-card" name="payment-method" value="credit-card" required>
+                    <label for="digital-wallet">Digital Wallet</label>
+                    <input type="radio" id="digital-wallet" name="payment-method" value="digital-wallet">
+                    <label for="cash-on-delivery">Cash on Delivery</label>
+                    <input type="radio" id="cash-on-delivery" name="payment-method" value="cash-on-delivery">
                 </div>
-                <div>
-                    <label for="contact">Contact Number:</label>
-                    <input type="tel" id="contact" name="contact" required>
+
+                <h3 id="typing-promo-code"></h3>
+                <div class="promo-code">
+                    <input type="text" id="promo-code" name="promo-code">
                 </div>
-                <div>
-                    <label for="delivery-notes">Delivery Notes:</label>
-                    <textarea id="delivery-notes" name="delivery-notes"></textarea>
+
+                <h3 id="typing-total-amount"></h3>
+                <div class="total-amount">
+                    <p>Total: ₱17.50</p>
                 </div>
+
+                <h3 id="typing-payment-confirmation"></h3>
+                <div class="payment-confirmation">
+                    <p>Your order has been placed. Thank you for your purchase.</p>
+                </div>
+
+                <h3 id="typing-terms-conditions"></h3>
+                <div class="terms-and-conditions">
+                    <label for="terms">I agree to the <a class="condition" href="terms-and-conditions.html" target="_blank">Terms and Conditions</a></label>
+                    <input type="checkbox" id="terms" name="terms" required>
+                </div>
+
+                <button type="submit" id="typing-submit-button"></button>
             </div>
-        </form>
-
-        <h3 id="typing-payment-methods"></h3>
-        <div class="payment-methods">
-            <label for="credit-card">Credit/Debit Card</label>
-            <input type="radio" id="credit-card" name="payment-method" value="credit-card" required>
-            <label for="digital-wallet">Digital Wallet</label>
-            <input type="radio" id="digital-wallet" name="payment-method" value="digital-wallet">
-            <label for "cash-on-delivery">Cash on Delivery</label>
-            <input type="radio" id="cash-on-delivery" name="payment-method" value="cash-on-delivery">
         </div>
+        <script>
+            // Function to retrieve cart data from localStorage
+            function getCartItems() {
+                return JSON.parse(localStorage.getItem('cart')) || [];
+            }
 
-        <h3 id="typing-promo-code"></h3>
-        <div class="promo-code">
-            <input type="text" id="promo-code" name="promo-code">
-        </div>
+            // Function to calculate the total amount of the cart
+            function calculateTotalAmount() {
+                const cartItems = getCartItems();
+                let totalAmount = 0;
 
-        <h3 id="typing-total-amount"></h3>
-        <div class="total-amount">
-            <p>Total: ₱17.50</p>
-        </div>
+                cartItems.forEach(item => {
+                    totalAmount += item.price * item.quantity;
+                });
 
-        <h3 id="typing-payment-confirmation"></h3>
-        <div class="payment-confirmation">
-            <p>Your order has been placed. Thank you for your purchase.</p>
-        </div>
+                return totalAmount.toFixed(2);
+            }
 
-        <h3 id="typing-terms-conditions"></h3>
-        <div class="terms-and-conditions">
-            <label for="terms">I agree to the <a class="condition" href="terms-and-conditions.html" target="_blank">Terms and Conditions</a></label>
-            <input type="checkbox" id="terms" name="terms" required>
-        </div>
+            // Function to display total amount on the payment page
+            function displayTotalAmount() {
+                const totalAmountContainer = document.querySelector('.total-amount p');
+                const totalAmountValue = calculateTotalAmount();
 
-        <button type="submit" id="typing-submit-button"></button>
+                // Display total amount
+                totalAmountContainer.textContent = `Total: ₱${totalAmountValue}`;
+            }
+
+            // Function to display cart items on the payment page
+            function displayCartItems() {
+                const cartItems = getCartItems();
+                const orderSummaryList = document.querySelector('.order-summary ul');
+
+                // Clear any existing items
+                orderSummaryList.innerHTML = '';
+
+                // Display each item in the cart
+                cartItems.forEach(item => {
+                    const listItem = document.createElement('li');
+                    listItem.textContent = `${item.name} - Quantity: ${item.quantity} - Price: ₱${(item.price * item.quantity).toFixed(2)}`;
+                    orderSummaryList.appendChild(listItem);
+                });
+
+                // Display total amount
+                displayTotalAmount();
+            }
+
+            // Call the function to display cart items when the page loads
+            window.onload = displayCartItems;
+
+            const introVideo = document.querySelector('.intro');
+            const introLoopVideo = document.querySelector('.intro-loop');
+
+            const typingElements = [
+                { id: "typing-heading", text: "Payment" },
+                { id: "typing-order-summary", text: "Order Summary" },
+                { id: "typing-delivery-info", text: "Delivery Information" },
+                { id: "typing-payment-methods", text: "Payment Methods" },
+                { id: "typing-promo-code", text: "Promo Code" },
+                { id: "typing-total-amount", text: "Total Amount" },
+                { id: "typing-payment-confirmation", text: "Payment Confirmation" },
+                { id: "typing-terms-conditions", text: "Terms and Conditions" },
+                { id: "typing-submit-button", text: "Pay Now" }
+            ];
+
+            // Function to simulate typing effect for an element
+            function typeText(element, text, index = 0) {
+                if (index < text.length) {
+                    element.textContent += text.charAt(index);
+                    index++;
+                    setTimeout(() => typeText(element, text, index), 100); // Adjust typing speed here
+                }
+            }
+
+            // When the first video can play, play the video and start simulating the typing effect
+            introVideo.addEventListener('canplay', function () {
+                introVideo.play();
+
+                // Start simulating the typing effect for each element
+                for (const el of typingElements) {
+                    const element = document.getElementById(el.id);
+                    typeText(element, el.text);
+                }
+            });
+
+            // When the first video ends, hide it and play the loop video
+            introVideo.addEventListener('ended', function () {
+                introVideo.style.display = 'none';
+                introLoopVideo.play();
+            });
+
+            // Ensure the loop video plays continuously
+            introLoopVideo.addEventListener('ended', function () {
+                introLoopVideo.currentTime = 0;
+                introLoopVideo.play();
+            });
+        </script>
     </div>
-</div>
-    <script>
-// Function to retrieve cart data from localStorage
-function getCartItems() {
-        return JSON.parse(localStorage.getItem('cart')) || [];
-    }
-
-    // Function to calculate the total amount of the cart
-    function calculateTotalAmount() {
-        const cartItems = getCartItems();
-        let totalAmount = 0;
-
-        cartItems.forEach(item => {
-            totalAmount += item.price * item.quantity;
-        });
-
-        return totalAmount.toFixed(2);
-    }
-
-    // Function to display total amount on the payment page
-    function displayTotalAmount() {
-        const totalAmountContainer = document.querySelector('.total-amount p');
-        const totalAmountValue = calculateTotalAmount();
-
-        // Display total amount
-        totalAmountContainer.textContent = `Total: ₱${totalAmountValue}`;
-    }
-
-    // Function to display cart items on the payment page
-    function displayCartItems() {
-        const cartItems = getCartItems();
-        const orderSummaryList = document.querySelector('.order-summary ul');
-
-        // Clear any existing items
-        orderSummaryList.innerHTML = '';
-
-        // Display each item in the cart
-        cartItems.forEach(item => {
-            const listItem = document.createElement('li');
-            listItem.textContent = `${item.name} - Quantity: ${item.quantity} - Price: ₱${(item.price * item.quantity).toFixed(2)}`;
-            orderSummaryList.appendChild(listItem);
-        });
-
-        // Display total amount
-        displayTotalAmount();
-    }
-
-    // Call the function to display cart items when the page loads
-    window.onload = displayCartItems;
-        
-        const introVideo = document.querySelector('.intro');
-        const introLoopVideo = document.querySelector('.intro-loop');
-    
-        const typingElements = [
-            { id: "typing-heading", text: "Payment" },
-            { id: "typing-order-summary", text: "Order Summary" },
-            { id: "typing-delivery-info", text: "Delivery Information" },
-            { id: "typing-payment-methods", text: "Payment Methods" },
-            { id: "typing-promo-code", text: "Promo Code" },
-            { id: "typing-total-amount", text: "Total Amount" },
-            { id: "typing-payment-confirmation", text: "Payment Confirmation" },
-            { id: "typing-terms-conditions", text: "Terms and Conditions" },
-            { id: "typing-submit-button", text: "Pay Now" }
-        ];
-    
-        // Function to simulate typing effect for an element
-        function typeText(element, text, index = 0) {
-            if (index < text.length) {
-                element.textContent += text.charAt(index);
-                index++;
-                setTimeout(() => typeText(element, text, index), 100); // Adjust typing speed here
-            }
-        }
-    
-        // When the first video can play, play the video and start simulating the typing effect
-        introVideo.addEventListener('canplay', function() {
-            introVideo.play();
-    
-            // Start simulating the typing effect for each element
-            for (const el of typingElements) {
-                const element = document.getElementById(el.id);
-                typeText(element, el.text);
-            }
-        });
-    
-        // When the first video ends, hide it and play the loop video
-        introVideo.addEventListener('ended', function() {
-            introVideo.style.display = 'none';
-            introLoopVideo.play();
-        });
-    
-        // Ensure the loop video plays continuously
-        introLoopVideo.addEventListener('ended', function() {
-            introLoopVideo.currentTime = 0;
-            introLoopVideo.play();
-        });
-    </script>
-</div>  
 </body>
 </html>
