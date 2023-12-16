@@ -6,7 +6,6 @@
         body {
             margin: 0;
             padding: 0;
-            font-size: 16px; /* Set a base font size for better responsiveness */
         }
 
         .video-background {
@@ -25,22 +24,25 @@
             object-fit: cover;
         }
 
+        /* Apply a CSS zoom-in animation to the page */
         .zoom-in-page {
             animation: zoomIn 1s ease forwards;
-            opacity: 0;
+            opacity: 0; /* Initially, set the opacity to 0 to make the page invisible */
         }
 
+        /* Define the zoom-in animation */
         @keyframes zoomIn {
             0% {
-                transform: scale(0);
+                transform: scale(0); /* Start with zero scale (invisible) */
                 opacity: 0;
             }
             100% {
-                transform: scale(1);
+                transform: scale(1); /* End with the original scale (visible) */
                 opacity: 1;
             }
         }
 
+        /* Payment form styles */
         .payment-form {
             background: transparent;
             padding: 20px;
@@ -51,7 +53,7 @@
             max-width: 600px;
             margin: 0 auto;
             color: #fff;
-            font-family: "Century Gothic", Arial, sans-serif;
+            font-family: "Century Gothic", Arial, sans-serif;   
         }
 
         .payment-form input[type="text"],
@@ -134,19 +136,6 @@
             margin: 0 auto;
         }
 
-        .payment-form h2,
-        .payment-form h3,
-        .order-summary,
-        #delivery-form,
-        .payment-methods,
-        .promo-code,
-        .total-amount,
-        .payment-confirmation,
-        .terms-and-conditions,
-        #typing-submit-button {
-            margin-bottom: 60px;
-        }
-
         .payment-form h2 {
             font-size: 1.5rem;
             color: #fff;
@@ -159,6 +148,12 @@
             font-family: "Century Gothic", Arial, sans-serif;
         }
 
+        @media screen and (max-width: 768px) {
+            .payment-form {
+                padding: 10px;
+            }
+        }
+
         .input-container {
             display: flex;
             flex-wrap: wrap;
@@ -166,22 +161,12 @@
         }
 
         .input-container div {
-            flex: 0 0 100%;
+            flex: 0 0 calc(48% - 5px);
             margin-bottom: 10px;
         }
 
         .input-container label {
             flex: 0 0 100%;
-        }
-
-        @media screen and (min-width: 768px) {
-            .payment-form {
-                max-width: 100%;
-            }
-
-            .input-container div {
-                flex: 0 0 calc(48% - 5px);
-            }
         }
     </style>
 </head>
