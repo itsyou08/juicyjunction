@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Cart</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding-top: 70px;
+            background: linear-gradient(300deg, #f90133, #5d0303);
+            background-size: 240% 240%;
+            animation: gradient-animation 20s ease infinite;
+        }
+
+        @keyframes gradient-animation {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+        .cart-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 20px black;
+            margin-bottom: 60px; /* Adjust the value as needed */
+        }
+
+        .cart-item {
+            border-bottom: 1px solid #ddd;
+            padding: 10px;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            text-align: left;
+        }
+
+        .cart-item img {
+            width: 80px;
+            max-height: 80px;
+            object-fit: cover;
+            border-radius: 5px;
+            margin-right: 10px;
+            box-shadow: 0px 0px 10px black;
+        }
+
+        .cart-item-info {
+            flex-grow: 1;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .cart-item h2 {
+            font-size: 18px;
+            color: #e74c3c;
+            margin-bottom: 5px;
+        }
+
+        .cart-item p {
+            font-size: 14px;
+            color: #333;
+            margin: 5px 0;
+        }
+
+        .cart-item-quantity {
+            display: flex;
+            align-items: center;
+        }
+
+        .quantity-buttons {
+            display: flex;
+            align-items: center;
+        }
+
+        .quantity-button {
+            background-color: #3498db;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            font-size: 12px;
+            margin: 0 5px;
+            padding: 5px 10px;
+        }
+
+        .quantity-button:hover {
+            background-color: #2980b9;
+        }
+
+        .remove-button {
+            background-color: #e74c3c;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            padding: 5px 10px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            font-size: 12px;
+            margin-left: 10px;
+        }
+
+        .remove-button:hover {
+            background-color: #c0392b;
+        }
+
+        .cart-total {
+            text-align: right;
+            margin-top: 20px;
+        }
+
+        .cart-total p {
+            font-size: 16px;
+            margin: 5px 0;
+        }
+
+        .checkout-button {
+            background-color: #3498db;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 15px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            font-size: 16px;
+            margin-top: 20px;
+        }
+
+        .checkout-button:hover {
+            background-color: #2980b9;
+        }
+
+  /* Media query for responsive design */
+@media (max-width: 600px) {
+    .cart-item {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .cart-item-info {
+        flex-direction: column;
+        align-items: flex-start;
+        width: 100%;
+    }
+}
+
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.7); /* Original background color */
+    padding: 15px;
+    z-index: 1000;
+}
+
+nav {
+    float: left;
+}
+
+nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+}
+
+nav li {
+    margin-right: 30px;
+}
+
+nav a {
+    text-decoration: none;
+}
+
+nav button {
+    background: none;
+    border: none;
+    color: white;
+    font-family: "Arial", sans-serif;
+    font-weight: bold;
+    font-size: 16px;
+    cursor: pointer;
+    position: relative;
+}
+
+nav button::before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border: 2px solid transparent;
+    transition: border-color 0.3s ease;
+    top: 0;
+    left: 0;
+}
+
+nav button:hover::before {
+    border-color: white;
+}
+/* Footer Styles */
+
+footer {
+    background-color: #333;
+    color: #fff;
+    padding: 10px 0;
+}
+
+.footer-container {
+    display: flex;
+    flex-wrap: wrap; /* Allow items to wrap to the next line on smaller screens */
+    justify-content: space-around;
+}
+
+.quick-links,
+.social-media,
+.contact-info,
+.logo {
+    flex: 1;
+    text-align: center;
+    margin-bottom: 20px; /* Add margin for better spacing on smaller screens */
+}
+
+.quick-links ul,
+.social-media a,
+.contact-info p {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.quick-links a,
+.social-media a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 16px;
+    transition: color 0.3s ease;
+}
+
+.quick-links a:hover,
+.social-media a:hover {
+    color: #ffd700; /* Change to your desired hover color */
+}
+
+.social-media img {
+    width: 30px;
+    height: 30px;
+    margin: 0 10px;
+    transition: transform 0.3s ease;
+}
+
+.social-media img:hover {
+    transform: scale(1.2);
+}
+
+.contact-info h3 {
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+.contact-info p {
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+.logo img {
+    width: 100%; /* Make the logo width 100% to adjust according to the container size */
+    height: auto;
+    margin-bottom: 10px;
+    padding-left: 20px;
+}
+
+/* Media Query for smaller screens */
+@media screen and (max-width: 768px) {
+    .footer-container {
+        flex-direction: column; /* Stack items vertically on smaller screens */
+        align-items: center;
+    }
+
+    .logo,
+    .quick-links,
+    .social-media,
+    .contact-info {
+        width: 100%; /* Make each item take full width on smaller screens */
+    }
+
+    .social-media img {
+        margin: 0; /* Remove margin between social media icons on smaller screens */
+    }
+}
+
+
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="index.html"><button>Home</button></a></li>
+                <li><a href="sampleabout.html"><button>About</button></a></li>
+                <li><a href="menu.html"><button>Menu</button></a></li>
+                <li><a href="cart.html"><button>Cart</button></a></li>
+                <li><a href="#login"><button>Login</button></a></li>
+            </ul>
+        </nav>
+    </header>
+    <div class="cart-container">
+        <h1>Your Cart</h1>
+        <main id="cartItems">
+            <!-- Your cart items will be displayed here -->
+        </main>
+
+        <div class="cart-total" id="cartTotal">
+            <!-- Cart total will be displayed here -->
+        </div>
+
+        <button class="checkout-button" onclick="checkout()">Checkout</button>
+    </div>
+
+    <footer>
+        <div class="footer-container">
+
+            <div class="logo">
+                <img src="logo.png" alt="Food Logo">
+            </div>
+
+            <div class="quick-links">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="sampleabout.html">About</a></li>
+                    <li><a href="menu.html">Menu</a></li>
+                    <li><a href="cart.html">Cart</a></li>
+                    <li><a href="#login">Login</a></li>
+                </ul>
+            </div>
+            <div class="social-media">
+    <h3>Connect with Us</h3>
+    <a href="#" target="_blank"><img src="footer/fb.png" alt="Facebook"></a>
+    <a href="#" target="_blank"><img src="footer/twi.png" alt="Twitter"></a>
+    <a href="#" target="_blank"><img src="footer/ins.png" alt="Instagram"></a>
+    <!-- Add more social media icons as needed -->
+</div>
+            <div class="contact-info">
+                <h3>Contact Us</h3>
+                <p>Email: juicyjunction@gmail.com</p>
+                <p>Phone: +1 (555) 123-4567</p>
+                <p>Address: 123 Main Street, Cityville</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Function to retrieve items from local storage and display in the cart
+        function displayCartItems() {
+            const cartItemsContainer = document.getElementById('cartItems');
+            const cartTotalContainer = document.getElementById('cartTotal');
+            const cartItems = JSON.parse(localStorage.getItem('cart')) || [];
+
+            if (cartItems.length === 0) {
+                cartItemsContainer.innerHTML = '<h3>Your cart is empty.</h3>';
+                return;
+            }
+
+            cartItemsContainer.innerHTML = '';
+            cartTotalContainer.innerHTML = '';
+
+            let totalCost = 0;
+
+            cartItems.forEach((item, index) => {
+                const cartItemDiv = document.createElement('div');
+                cartItemDiv.classList.add('cart-item');
+
+                totalCost += item.price * item.quantity;
+
+                // Replace spaces with line breaks in the item name
+                const itemName = item.name.replace(/ /g, '<br>');
+
+                cartItemDiv.innerHTML = `
+                    <img src="menu/burger${item.id}.jpg" alt="${item.name}">
+                    <div class="cart-item-info">
+                        <h2>${itemName}</h2>
+                        <p>Price: ₱${item.price}</p>
+                        <p>Total: ₱${item.price * item.quantity}</p>
+                        <div class="cart-item-quantity">
+                            <span class="quantity-label">Quantity:</span>
+                            <div class="quantity-buttons">
+                                <button class="quantity-button" onclick="updateQuantity(${index}, -1)">-</button>
+                                <span>${item.quantity}</span>
+                                <button class="quantity-button" onclick="updateQuantity(${index}, 1)">+</button>
+                            </div>
+                        </div>
+                        <button class="remove-button" onclick="removeItem(${index})">Remove</button>
+                    </div>
+                `;
+
+                cartItemsContainer.appendChild(cartItemDiv);
+            });
+
+            // Display total cost
+            const totalCostElement = document.createElement('p');
+            totalCostElement.textContent = `Total: ₱${totalCost}`;
+            cartTotalContainer.appendChild(totalCostElement);
+        }
+
+        // Function to update the quantity of an item in the cart
+        function updateQuantity(index, change) {
+            const cartItems = JSON.parse(localStorage.getItem('cart')) || [];
+
+            // Ensure the quantity is at least 1
+            cartItems[index].quantity = Math.max(1, cartItems[index].quantity + change);
+
+            // Update the local storage
+            localStorage.setItem('cart', JSON.stringify(cartItems));
+
+            // Redisplay the updated cart
+            displayCartItems();
+        }
+
+        // Function to remove an item from the cart
+        function removeItem(index) {
+            const cartItems = JSON.parse(localStorage.getItem('cart')) || [];
+
+            // Remove the item at the specified index
+            cartItems.splice(index, 1);
+
+            // Update the local storage
+            localStorage.setItem('cart', JSON.stringify(cartItems));
+
+            // Redisplay the updated cart
+            displayCartItems();
+        }
+
+        function checkout() {
+        // Implement your checkout logic here
+        // For now, let's redirect to payment.html
+        window.location.href = 'payment.html';
+    }
+
+    // Display cart items when the page loads
+    displayCartItems();
+
+    </script>
+</body>
+</html>

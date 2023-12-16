@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Home</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: "Century Gothic", Arial, sans-serif;
+      overflow-x: hidden; /* Add this line */
+    }
+
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background: rgba(0, 0, 0, 0.7);
+      padding: 15px;
+      z-index: 1000;
+    }
+
+    nav {
+      float: left;
+    }
+
+    nav ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+    }
+
+    nav li {
+      margin-right: 30px;
+    }
+
+    nav a {
+      text-decoration: none;
+    }
+
+    nav button {
+      background: none;
+      border: none;
+      color: white;
+      font-family: "Century Gothic", Arial, sans-serif;
+      font-weight: bold;
+      font-size: 16px;
+      cursor: pointer;
+      position: relative;
+    }
+
+    nav button::before {
+      content: '';
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      border: 2px solid transparent;
+      transition: border-color 0.3s ease;
+      top: 0;
+      left: 0;
+    }
+
+    nav button:hover::before {
+      border-color: white;
+    }
+
+    section {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      position: relative;
+    }
+
+    video {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: -1;
+    }
+
+    .overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      z-index: 0;
+    }
+
+    .center-text {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      max-width: 100%; /* Adjust the width as needed */
+      background: rgba(0, 0, 0, 0.7);
+      border-radius: 10px;
+      text-align: left;
+      font-size: 70px;
+      padding-left: 8%;
+    }
+
+    .order-now-button {
+      position: absolute;
+      top: 70%;
+      left: 50%; /* Center the button horizontally */
+      transform: translateX(-50%); /* Adjust to center the button */
+      background: #f44336; /* Change the background color as desired */
+      color: white;
+      border: none;
+      padding: 15px 30px;
+      font-size: 20px;
+      cursor: pointer;
+      border-radius: 8px; /* Add border-radius */
+      transition: background 0.3s ease;
+    }
+
+    .order-now-button:hover {
+      background: #d32f2f; /* Change the background color on hover */
+    }
+
+    .popup-overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      z-index: 1000;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+    }
+
+    .popup-content {
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    }
+
+    .popup-close {
+      cursor: pointer;
+    }
+
+    /* New Styles for Signup Popup */
+    .signup-popup {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background: #3498db; /* Adjust the background color as desired */
+      padding: 15px;
+      color: #fff;
+      text-align: center;
+      z-index: 1000;
+    }
+
+    .signup-message {
+      font-size: 16px;
+      margin-bottom: 10px;
+    }
+
+    .signup-button {
+      background: #fff; /* Adjust the background color as desired */
+      color: #3498db; /* Adjust the text color as desired */
+      border: none;
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+      border-radius: 5px;
+    }
+/* Footer Styles */
+
+footer {
+    background-color: #333;
+    color: #fff;
+    padding: 10px 0;
+}
+
+.footer-container {
+    display: flex;
+    flex-wrap: wrap; /* Allow items to wrap to the next line on smaller screens */
+    justify-content: space-around;
+}
+
+.quick-links,
+.social-media,
+.contact-info,
+.logo {
+    flex: 1;
+    text-align: center;
+    margin-bottom: 20px; /* Add margin for better spacing on smaller screens */
+}
+
+.quick-links ul,
+.social-media a,
+.contact-info p {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.quick-links a,
+.social-media a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 16px;
+    transition: color 0.3s ease;
+}
+
+.quick-links a:hover,
+.social-media a:hover {
+    color: #ffd700; /* Change to your desired hover color */
+}
+
+.social-media img {
+    width: 30px;
+    height: 30px;
+    margin: 0 10px;
+    transition: transform 0.3s ease;
+}
+
+.social-media img:hover {
+    transform: scale(1.2);
+}
+
+.contact-info h3 {
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+.contact-info p {
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+.logo img {
+    width: 100%; /* Make the logo width 100% to adjust according to the container size */
+    height: auto;
+    margin-bottom: 10px;
+    padding-left: 20px;
+}
+
+/* Media Query for smaller screens */
+@media screen and (max-width: 768px) {
+    .footer-container {
+        flex-direction: column; /* Stack items vertically on smaller screens */
+        align-items: center;
+    }
+
+    .logo,
+    .quick-links,
+    .social-media,
+    .contact-info {
+        width: 100%; /* Make each item take full width on smaller screens */
+    }
+
+    .social-media img {
+        margin: 0; /* Remove margin between social media icons on smaller screens */
+    }
+}
+
+/*categories*/
+
+#categories {
+    background-color: #f8f8f8;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  #categories h2 {
+    color: #333;
+    font-size: 32px;
+    margin-bottom: 30px;
+  }
+
+  .category-container {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .burger-section {
+    flex: 0 0 calc(25% - 20px); /* Adjust the width as needed, considering margin */
+    box-sizing: border-box;
+    text-align: center;
+    padding: 20px;
+    margin: 20px 10px;
+    border-radius: 10px;
+    background-color: #fff;
+    color: #333;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+
+  .burger-section h2 {
+    font-size: 24px;
+    margin-bottom: 15px;
+  }
+
+  .burger-image {
+  overflow: hidden;
+  position: relative;
+}
+
+.burger-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+  transition: transform 0.3s ease;
+}
+
+.burger-section:hover .burger-image img {
+  transform: scale(1.1);
+}
+
+
+  /* Mobile Styles */
+
+@media only screen and (max-width: 600px) {
+  header {
+    padding: 10px;
+  }
+
+  nav ul {
+    flex-direction: column;
+  }
+
+  nav li {
+    margin: 5px 0;
+  }
+
+  nav button {
+    font-size: 14px;
+  }
+
+  .center-text {
+    font-size: 40px;
+    padding-left: 5%;
+  }
+
+  .order-now-button {
+    top: 60%;
+  }
+
+  .signup-popup {
+    padding: 10px;
+  }
+
+  .signup-message {
+    font-size: 14px;
+  }
+
+  .signup-button {
+    font-size: 14px;
+  }
+
+}
+
+  </style>
+  
+</head>
+<body>
+
+  <header>
+    <nav>
+      <ul>
+        <li><a href="index.html"><button >Home</button></a></li>
+        <li><a href="sampleabout.html"><button>About</button></a></li>
+        <li><a href="menu.html"><button>Menu</button></a></li>
+        <li><a href="cart.html"><button>Cart</button></a></li>
+        <li><a href="#login"><button>Login</button></a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Popup -->
+  <div class="popup-overlay" id="salePopup">
+    <div class="popup-content">
+      <p>We're on Sale! Enjoy special discounts on our delicious burgers.</p>
+      <span class="popup-close" onclick="closeSalePopup()">Close</span>
+    </div>
+  </div>
+
+  <!-- Signup Popup -->
+  <div class="signup-popup" id="signupPopup">
+    <p class="signup-message">Sign up now to receive exclusive offers and updates!</p>
+    <button class="signup-button" onclick="redirectToSignUp()">Sign Up</button>
+    <span class="popup-close" onclick="closeSignupPopup()">Close</span>
+  </div>
+
+  <section id="home">
+    <video autoplay muted loop>
+      <source src="homebg.mp4" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
+
+    <section class="center-text">
+      <p>Enjoy our mouthwatering burger made with the finest ingredients.</p>
+    </section>
+
+    <button class="order-now-button" onclick="openSignupPopup()">Order Now</button>
+  </section>
+
+   <!-- Sections for different burger categories -->
+   <section id="categories">
+    <h2>Categories</h2>
+
+    <div class="category-container">
+      <!-- Classic Meat Burgers -->
+      <div class="burger-section classic-meat" style="background-color: #e74c3c; color: white;">
+        <h2 onclick="filterCategory('classic-meat')">Classic Meat Burgers</h2>
+        <a href="classic.html">
+          <div class="burger-image">
+            <img src="menu/burger1.jpg" alt="Classic Meat Burger">
+          </div>
+        </a>
+        <!-- Add more content and images for Classic Meat Burgers -->
+      </div>
+
+      <!-- Gourmet and Specialty Burgers -->
+      <div class="burger-section gourmet-specialty" style="background-color: #3498db; color: white;">
+        <h2 onclick="filterCategory('gourmet-specialty')">Gourmet and Specialty Burgers</h2>
+        <a href="gourmet.html">
+          <div class="burger-image">
+            <img src="menu/burger7.jpg" alt="Gourmet Burger">
+          </div>
+        </a>
+        <!-- Add more content and images for Gourmet and Specialty Burgers -->
+      </div>
+
+      <div class="burger-section fusion-exotic" style="background-color: #2ecc71; color: white;">
+        <h2 onclick="filterCategory('fusion-exotic')">Fusion and Exotic Burgers</h2>
+        <a href="fusion.html">
+          <div class="burger-image">
+            <img src="menu/burger4.jpg" alt="Fusion Burger">
+          </div>
+        </a>
+        <!-- Add more content and images for Fusion and Exotic Burgers -->
+      </div>
+
+      <!-- Unique and Creative Burgers -->
+      <div class="burger-section unique-creative" style="background-color: #f39c12; color: white;">
+        <h2 onclick="filterCategory('unique-creative')">Unique and Creative Burgers</h2>
+        <a href="unique.html">
+          <div class="burger-image">
+            <img src="menu/burger5.jpg" alt="Creative Burger">
+          </div>
+        </a>
+        <!-- Add more content and images for Unique and Creative Burgers -->
+      </div>
+    </div>
+  </section>
+
+  
+  <footer>
+    <div class="footer-container">
+
+        <div class="logo">
+            <img src="logo.png" alt="Food Logo">
+        </div>
+
+        <div class="quick-links">
+            <h3>Quick Links</h3>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="sampleabout.html">About</a></li>
+                <li><a href="menu.html">Menu</a></li>
+                <li><a href="cart.html">Cart</a></li>
+            </ul>
+        </div>
+        <div class="social-media">
+<h3>Connect with Us</h3>
+<a href="#" target="_blank"><img src="footer/fb.png" alt="Facebook"></a>
+<a href="#" target="_blank"><img src="footer/twi.png" alt="Twitter"></a>
+<a href="#" target="_blank"><img src="footer/ins.png" alt="Instagram"></a>
+<!-- Add more social media icons as needed -->
+</div>
+        <div class="contact-info">
+            <h3>Contact Us</h3>
+            <p>Email: info@kensfood.com</p>
+            <p>Phone: +1 (555) 123-4567</p>
+            <p>Address: 123 Main Street, Cityville</p>
+        </div>
+    </div>
+</footer>
+
+<script>
+  function openSalePopup() {
+    document.getElementById("salePopup").style.display = "flex";
+  }
+
+  function closeSalePopup() {
+    document.getElementById("salePopup").style.display = "none";
+    localStorage.setItem('popupShown', 'true');
+  }
+
+  function openSignupPopup() {
+    document.getElementById("signupPopup").style.display = "block";
+  }
+
+  function closeSignupPopup() {
+    document.getElementById("signupPopup").style.display = "none";
+    localStorage.setItem('signupPopupShown', 'true');
+  }
+
+  function redirectToSignUp() {
+    // Add your code to redirect to the signup page
+    // Example: window.location.href = 'signup.html';
+  }
+
+  function checkPopupCookie() {
+    const popupShown = localStorage.getItem('popupShown');
+    const isHomePage = window.location.pathname === '/index.html'; // Adjust the path as needed
+    if (!popupShown && isHomePage) {
+      openSalePopup();
+    }
+  }
+
+  function checkSignupPopupCookie() {
+    const signupPopupShown = localStorage.getItem('signupPopupShown');
+    const isHomePage = window.location.pathname === '/index.html'; // Adjust the path as needed
+    if (!signupPopupShown && isHomePage) {
+      openSignupPopup();
+    }
+  }
+
+  window.onload = function () {
+    checkPopupCookie();
+    checkSignupPopupCookie();
+  };
+
+  // Function to update the height of burger images
+function updateBurgerImageHeight() {
+  var burgerImages = document.querySelectorAll('.burger-image img');
+  
+  burgerImages.forEach(function(image) {
+    var containerWidth = image.parentElement.offsetWidth;
+    var newHeight = containerWidth * 0.75; // You can adjust this aspect ratio as needed
+    image.style.height = newHeight + 'px';
+  });
+}
+
+// Call the function on window resize
+window.addEventListener('resize', updateBurgerImageHeight);
+
+// Call the function once on page load
+window.onload = function() {
+  updateBurgerImageHeight();
+};
+
+</script>
+
+
+
+
+
+</body>
+</html>

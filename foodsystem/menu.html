@@ -1,0 +1,776 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <style>
+         body {
+            margin: 0;
+            padding: 0;
+            font-family: "Century Gothic", Arial, sans-serif;
+            background: linear-gradient(300deg, #44000B,#de1a1a);
+        }
+
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 15px;
+            z-index: 1000;
+            display: flex;
+    justify-content: space-between;
+        }
+
+        nav {
+            float: left;
+        }
+
+        nav ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+        }
+
+        nav li {
+            margin-right: 30px;
+        }
+
+        nav a {
+            text-decoration: none;
+        }
+
+        nav button {
+            background: none;
+            border: none;
+            color: white;
+            font-family: "Century Gothic", Arial, sans-serif;
+            font-weight: bold;
+            font-size: 16px;
+            cursor: pointer;
+            position: relative;
+        }
+
+        nav button::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border: 2px solid transparent;
+            transition: border-color 0.3s ease;
+            top: 0;
+            left: 0;
+        }
+
+        nav button:hover::before {
+            border-color: white;
+        }
+
+
+        @keyframes gradient-animation {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+        .menu-container {
+            padding-top: 8%;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .menu-item {
+            background-color: #fff;
+            margin: 20px;
+            padding: 20px;
+            flex-shrink: 0;
+            border-radius: 25px;
+            width: 300px;
+            text-align: center;
+            box-shadow: 0px 0px 20px black;
+            transition: transform .3s;
+        }
+
+        .menu-item:hover {
+            transform: scale(1.1);
+        }
+
+        .menu-item img {
+            width: 100%;
+            max-height: 200px;
+            object-fit: cover;
+            border-radius: 10px;
+            margin-bottom: 10px;
+            box-shadow: 0px 0px 10px black;
+        }
+
+        .menu-item h2 {
+            font-size: 24px;
+            color: #e74c3c;
+        }
+
+        .menu-item p {
+            font-size: 18px;
+            color: #333;
+            margin: 10px 0;
+        }
+
+        .price-icon {
+            margin-right: 5px;
+        }
+/* Footer Styles */
+
+footer {
+    background-color: #333;
+    color: #fff;
+    padding: 10px 0;
+}
+
+.footer-container {
+    display: flex;
+    flex-wrap: wrap; /* Allow items to wrap to the next line on smaller screens */
+    justify-content: space-around;
+}
+
+.quick-links,
+.social-media,
+.contact-info,
+.logo {
+    flex: 1;
+    text-align: center;
+    margin-bottom: 20px; /* Add margin for better spacing on smaller screens */
+}
+
+.quick-links ul,
+.social-media a,
+.contact-info p {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.quick-links a,
+.social-media a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 16px;
+    transition: color 0.3s ease;
+}
+
+.quick-links a:hover,
+.social-media a:hover {
+    color: #ffd700; /* Change to your desired hover color */
+}
+
+.social-media img {
+    width: 30px;
+    height: 30px;
+    margin: 0 10px;
+    transition: transform 0.3s ease;
+}
+
+.social-media img:hover {
+    transform: scale(1.2);
+}
+
+.contact-info h3 {
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+.contact-info p {
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+.logo img {
+    width: 100%; /* Make the logo width 100% to adjust according to the container size */
+    height: auto;
+    margin-bottom: 10px;
+    padding-left: 20px;
+}
+
+/* Media Query for smaller screens */
+@media screen and (max-width: 768px) {
+    .footer-container {
+        flex-direction: column; /* Stack items vertically on smaller screens */
+        align-items: center;
+    }
+
+    .logo,
+    .quick-links,
+    .social-media,
+    .contact-info {
+        width: 100%; /* Make each item take full width on smaller screens */
+    }
+
+    .social-media img {
+        margin: 0; /* Remove margin between social media icons on smaller screens */
+    }
+}
+
+        .add-to-cart-button {
+            align-items: center;
+            background-color: #3498db;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 15px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .add-to-cart-button:hover {
+            background-color: #cd1414;
+        }
+
+        .add-to-cart-button .icon {
+            margin-right: 5px;
+        }
+
+        .category-buttons {
+            margin-bottom: 20px;
+        }
+
+        .filter-container {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.filter-container label {
+    font-size: 16px;
+    color: white;
+    margin-right: 10px;
+}
+
+.filter-container select {
+    padding: 8px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    background-color: #362323;
+    color: white;
+    cursor: pointer;
+}
+
+.menu-container {
+    padding-top: 8%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+.menu-item{
+width: 250px;
+}
+.menu-item p {
+    font-size: 15px; /* You can adjust the size as needed */
+    color: #000000;
+    margin: 10px 0;
+}
+.menu-item h2 {
+    font-size: 20px; /* You can adjust the size as needed */
+    color: #d81515;
+    margin: 10px 0;
+}
+.search-bar-inline {
+    display: inline-block;
+    margin-left: 20px; /* Adjust the margin as needed */
+}
+
+.search-bar-inline input[type="text"] {
+    padding: 8px;
+    font-size: 16px;
+    border-radius: 5px;
+    background-color: #362323;
+    color: #fff;
+}
+
+.search-bar-inline button {
+    background-color: #3498db;
+    color: #fff;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: transform 0.2s; /* Add transition for a smooth effect */
+}
+
+.search-bar-inline button:hover {
+    transform: scale(1.1); /* Increase the scale on hover */
+}
+
+    </style>
+
+    <!-- Add this script section for the filter function -->
+    <script>
+function applyFilter() {
+    const filter = document.getElementById('filter').value.toLowerCase();
+    const menuItems = document.querySelectorAll('.menu-item');
+
+    menuItems.forEach(item => {
+        const category = (item.dataset.category || '').toLowerCase(); // Check if item.dataset.category is defined
+
+        if (filter === 'all' || category.includes(filter)) {
+            item.style.display = 'block';
+        } else {
+            item.style.display = 'none';
+        }
+    });
+}
+
+function performInlineSearch() {
+            const searchInput = document.querySelector('.search-bar-inline input[type="text"]');
+            const searchTerm = searchInput.value.toLowerCase();
+            const menuItems = document.querySelectorAll('.menu-item');
+
+            menuItems.forEach(item => {
+                const itemName = (item.dataset.name || '').toLowerCase();
+
+                if (itemName.includes(searchTerm)) {
+                    item.style.display = 'block';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+        }
+    </script>
+
+</head>
+<body>
+    <header>
+        <nav>
+          <ul>
+            <li><a href="index.html"><button >Home</button></a></li>
+            <li><a href="sampleabout.html"><button>About</button></a></li>
+            <li><a href="menu.html"><button>Menu</button></a></li>
+            <li><a href="cart.html"><button>Cart</button></a></li>
+            <li><a href="#login"><button>Login</button></a></li>
+          </ul>
+        </nav>
+
+        
+    </header>
+    <div style="text-align: center; color: white; font-size: 44px; padding-top: 100px;">Menu</div>
+    <div class="filter-container">
+        <label for="filter">Filter:</label>
+        <select id="filter" onchange="applyFilter()">
+            <option value="all">All</option>
+            <option value="classic meat burgers">Classic Meat Burgers</option>
+            <option value="gourmet and specialty burgers">Gourmet and Specialty Burgers</option>
+            <option value="fusion and exotic burgers">Fusion and Exotic Burgers</option>
+            <option value="unique and creative burgers">Unique and Creative Burgers</option>
+            <!-- Add more categories as needed -->
+        </select>
+
+         <!-- Add the inline search bar here -->
+         <div class="search-bar-inline">
+            <input type="text" placeholder="Search by name" />
+            <button onclick="performInlineSearch()">Search</button>
+        </div>
+    </div>
+
+    <div class="menu-container">
+        <div class="menu-item" data-id="1" data-name="Classic Burger" data-price="40" data-category="classic meat burgers">
+            <!-- ... rest of the content ... -->
+            <img src="menu/burger1.jpg" alt="Burger 1">
+            <h2>Classic Burger</h2>
+            <p>Delicious classic burger with lettuce, tomato, and cheese.</p>
+            <p class="price">₱40.00</p>
+            <p><button class="add-to-cart-button" onclick="addToCart(1, 'Classic Burger', 40)">
+                <span class="icon"><i class="fas fa-plus"></i></span> Add to Cart
+            </button></p>
+        </div>
+
+        <div class="menu-item" data-id="2" data-name="Veggie Burger" data-price="35" data-category="gourmet and specialty burgers">
+            <img src="menu/burger2.jpg" alt="Burger 2">
+            <h2>Veggie Burger</h2>
+            <p>A vegetarian delight with a patty made from fresh veggies.</p>
+            <p class="price">₱35.00</p>
+            <p><button class="add-to-cart-button" onclick="addToCart(2, 'Veggie Burger', 35)">
+                <span class="icon"><i class="fas fa-plus"></i></span> Add to Cart
+            </button></p>
+        </div>
+
+        <div class="menu-item" data-id="3" data-name="Bacon Avocado Burger" data-price="48" data-category="classic meat burgers">
+            <img src="menu/burger3.jpg" alt="Burger 3">
+            <h2>Bacon Avocado Burger</h2>
+            <p>Beef patty, bacon, avocado, lettuce, tomato, onion, and a special sauce.</p>
+            <p class="price">₱48.00</p>
+            <p><button class="add-to-cart-button" onclick="addToCart(3, 'Bacon Avocado Burger', 48)">
+                <span class="icon"><i class="fas fa-plus"></i></span> Add to Cart
+            </button></p>
+        </div>
+
+        <div class="menu-item" data-id="4" data-name="Mushroom Swiss Burger" data-price="45" data-category="classic meat burgers">
+            <img src="menu/burger4.jpg" alt="Burger 4">
+            <h2>Mushroom Swiss Burger</h2>
+            <p>Beef patty, Swiss cheese, sautéed mushrooms, lettuce, and garlic aioli.</p>
+            <p class="price">₱45.00</p>
+            <p><button class="add-to-cart-button" onclick="addToCart(4, 'Mushroom Swiss Burger', 45)">
+                <span class="icon"><i class="fas fa-plus"></i></span> Add to Cart
+            </button></p>
+        </div>
+
+        <div class="menu-item" data-id="5" data-name="BBQ Ranch Burger" data-price="39" data-category="classic meat burgers">
+            <img src="menu/burger5.jpg" alt="Burger 5">
+            <h2>BBQ Ranch Burger</h2>
+            <p>Beef patty, cheddar cheese, bacon, onion rings, lettuce, tomato, and BBQ ranch sauce.</p>
+            <p class="price">₱39.00</p>
+            <p><button class="add-to-cart-button" onclick="addToCart(5, 'BBQ Ranch Burger', 39)">
+                <span class="icon"><i class="fas fa-plus"></i></span> Add to Cart
+            </button></p>
+        </div>
+
+        <div class="menu-item" data-id="6" data-name="Spicy Jalapeño Burger" data-price="55" data-category="gourmet and specialty burgers">
+            <img src="menu/burger6.jpg" alt="Burger 6">
+            <h2>Spicy Jalapeño Burger</h2>
+            <p>Beef patty, pepper jack cheese, jalapeños, lettuce, tomato, and spicy mayo.</p>
+            <p class="price">₱55.00</p>
+            <p><button class="add-to-cart-button" onclick="addToCart(6, 'Spicy Jalapeño Burger', 55)">
+                <span class="icon"><i class="fas fa-plus"></i></span> Add to Cart
+            </button></p>
+        </div>
+
+        <div class="menu-item" data-id="7" data-name="Caprese Burger" data-price="66" data-category="gourmet and specialty burgers">
+            <img src="menu/burger7.jpg" alt="Burger 7">
+            <h2>Caprese Burger</h2>
+            <p>Beef or chicken patty, fresh mozzarella, tomato, basil, balsamic glaze, and pesto.</p>
+            <p class="price">₱66.00</p>
+            <p><button class="add-to-cart-button" onclick="addToCart(7, 'Caprese Burger', 66)">
+                <span class="icon"><i class="fas fa-plus"></i></span> Add to Cart
+            </button></p>
+        </div>
+
+        <div class="menu-item" data-id="8" data-name="Teriyaki Pineapple Burger" data-price="55" data-category="classic meat burgers"   >
+            <img src="menu/burger8.jpg" alt="Burger 8">
+            <h2>Teriyaki Pineapple Burger</h2>
+            <p>Beef or chicken patty, teriyaki glaze, grilled pineapple, lettuce, and mayonnaise.</p>
+            <p class="price">₱55.00</p>
+            <p><button class="add-to-cart-button" onclick="addToCart(8, 'Teriyaki Pineapple Burger', 55)">
+                <span class="icon"><i class="fas fa-plus"></i></span> Add to Cart
+            </button></p>
+        </div>
+
+        <div class="menu-item" data-id="9" data-name="Blue Cheese Burger" data-price="40" data-category="classic meat burgers">
+            <img src="menu/burger9.jpg" alt="Burger 9">
+            <h2>Blue Cheese Burger</h2>
+            <p>Beef patty, blue cheese crumbles, caramelized onions, lettuce, and aioli.</p>
+            <p class="price">₱40.00</p>
+            <p><button class="add-to-cart-button" onclick="addToCart(9, 'Blue Cheese Burger', 40)">
+                <span class="icon"><i class="fas fa-plus"></i></span> Add to Cart
+            </button></p>
+        </div>
+
+        <div class="menu-item" data-id="10" data-name="Guacamole Turkey Burger" data-price="50" data-category="classic meat burgers">
+            <img src="menu/burger10.jpg" alt="Burger 10">
+            <h2>Guacamole Turkey Burger</h2>
+            <p>Turkey patty, guacamole, lettuce, tomato, and a lime-cilantro mayo.</p>
+            <p class="price">₱50.00</p>
+            <p><button class="add-to-cart-button" onclick="addToCart(10, 'Guacamole Turkey Burger', 50)">
+                <span class="icon"><i class="fas fa-plus"></i></span> Add to Cart
+            </button></p>
+        </div>
+
+        <div class="menu-item" data-id="11" data-name="Maple Bacon Bourbon Burger" data-price="50" data-category="classic meat burgers">
+            <img src="menu/burger11.jpg" alt="Burger 11">
+            <h2>Maple Bacon Bourbon Burger</h2>
+            <p>A beef burger with maple-glazed bacon, bourbon-infused barbecue sauce, and cheddar cheese.</p>
+            <p class="price">₱50.00</p>
+            <p><button class="add-to-cart-button" onclick="addToCart(11, 'Maple Bacon Bourbon Burger', 50)">
+                <span class="icon"><i class="fas fa-plus"></i></span> Add to Cart
+            </button></p>
+        </div>
+
+        <div class="menu-item" data-id="12" data-name="Truffle Mushroom Burger" data-price="50" data-category="classic meat burgers">
+            <img src="menu/burger12.jpg" alt="Burger 12">
+            <h2>Truffle Mushroom Burger</h2>
+            <p>A beef burger with sautéed mushrooms in truffle oil, Swiss cheese, and arugula.</p>
+            <p class="price">₱50.00</p>
+            <p><button class="add-to-cart-button" onclick="addToCart(12, 'Truffle Mushroom Burger', 50)">
+                <span class="icon"><i class="fas fa-plus"></i></span> Add to Cart
+            </button></p>
+        </div>
+
+        <div class="menu-item" data-id="13" data-name="Guacamole Turkey Burger" data-price="50" data-category="fusion and exotic burgers">
+            <img src="menu/burger13.jpg" alt="Burger 13">
+            <h2>Mediterranean Lamb Burger</h2>
+            <p> A lamb patty seasoned with Mediterranean spices, topped with feta cheese, olives, and tzatziki.</p>
+            <p class="price">₱50.00</p>
+            <p><button class="add-to-cart-button" onclick="addToCart(13, 'Mediterranean Lamb Burger', 50)">
+                <span class="icon"><i class="fas fa-plus"></i></span> Add to Cart
+            </button></p>
+        </div>
+
+        <div class="menu-item" data-id="14" data-name="Buffalo Blue Turkey Burger" data-price="50" data-category="gourmet and specialty burgers">
+            <img src="menu/burger14.jpg" alt="Burger 14">
+            <h2>Buffalo Blue Turkey Burger</h2>
+            <p>A turkey burger with buffalo sauce, blue cheese crumbles, lettuce, and tomato.</p>
+            <p class="price">₱50.00</p>
+            <p><button class="add-to-cart-button" onclick="addToCart(14, 'Buffalo Blue Turkey Burger', 50)">
+                <span class="icon"><i class="fas fa-plus"></i></span> Add to Cart
+            </button></p>
+        </div>
+
+        <div class="menu-item" data-id="15" data-name="Bacon Ranch Chicken Burger" data-price="50" data-category="gourmet and specialty burgers">
+            <img src="menu/burger15.jpg" alt="Burger 15">
+            <h2>Bacon Ranch Chicken Burger</h2>
+            <p>A chicken patty with bacon, ranch dressing, lettuce, and tomato.</p>
+            <p class="price">₱50.00</p>
+            <p><button class="add-to-cart-button" onclick="addToCart(15, 'Bacon Ranch Chicken Burger', 50)">
+                <span class="icon"><i class="fas fa-plus"></i></span> Add to Cart
+            </button></p>
+        </div>
+       
+        <div class="menu-item" data-id="16" data-name="Apple Cheddar Turkey Burger" data-price="50" data-category="gourmet and specialty burgers">
+            <img src="menu/burger16.jpg" alt="Burger 16">
+            <h2>Apple Cheddar Turkey Burger</h2>
+            <p>A turkey burger with sharp cheddar cheese, sliced apples, and honey mustard.</p>
+            <p class="price">₱50.00</p>
+            <p><button class="add-to-cart-button" onclick="addToCart(16, 'Apple Cheddar Turkey Burger', 50)">
+                <span class="icon"><i class="fas fa-plus"></i></span> Add to Cart
+            </button></p>
+        </div>
+       
+        <div class="menu-item" data-id="17" data-name="Garlic Parmesan Chicken Burger" data-price="50" data-category="gourmet and specialty burgers">
+            <img src="menu/burger17.jpg" alt="Burger 17">
+            <h2>Garlic Parmesan Chicken Burger</h2>
+            <p> A chicken patty with garlic aioli, Parmesan cheese, and arugula.</p>
+            <p class="price">₱50.00</p>
+            <p><button class="add-to-cart-button" onclick="addToCart(17, 'Garlic Parmesan Chicken Burger', 50)">
+                <span class="icon"><i class="fas fa-plus"></i></span> Add to Cart
+            </button></p>
+        </div>
+       
+        <div class="menu-item" data-id="18" data-name="Hawaiian BBQ Bacon Burger" data-price="50" data-category="gourmet and specialty burgers">
+            <img src="menu/burger18.jpg" alt="Burger 18">
+            <h2>Hawaiian BBQ Bacon Burger</h2>
+            <p>A beef burger with pineapple, bacon, Swiss cheese, and barbecue sauce.</p>
+            <p class="price">₱50.00</p>
+            <p><button class="add-to-cart-button" onclick="addToCart(18, 'Hawaiian BBQ Bacon Burger', 50)">
+                <span class="icon"><i class="fas fa-plus"></i></span> Add to Cart
+            </button></p>
+        </div>
+
+        <div class="menu-item" data-id="19" data-name="Jalapeño Popper Turkey Burger: " data-price="50" data-category="gourmet and specialty burgers">
+            <img src="menu/burger19.jpg" alt="Burger 19">
+            <h2>Jalapeño Popper Turkey Burger: </h2>
+            <p>A turkey burger with jalapeño cream cheese, jalapeño slices, and crispy bacon.</p>
+            <p class="price">₱50.00</p>
+            <p><button class="add-to-cart-button" onclick="addToCart(19, 'Jalapeño Popper Turkey Burger: ', 50)">
+                <span class="icon"><i class="fas fa-plus"></i></span> Add to Cart
+            </button></p>
+        </div>
+
+        <div class="menu-item" data-id="20" data-name="Teriyaki Ginger Veggie Burger" data-price="50" data-category="gourmet and specialty burgers">
+            <img src="menu/burger20.jpg" alt="Burger 20">
+            <h2>Teriyaki Ginger Veggie Burger</h2>
+            <p> A vegetarian burger with teriyaki glaze, ginger-infused mayo, and Asian slaw.</p>
+            <p class="price">₱50.00</p>
+            <p><button class="add-to-cart-button" onclick="addToCart(20, 'Teriyaki Ginger Veggie Burger', 50)">
+                <span class="icon"><i class="fas fa-plus"></i></span> Add to Cart
+            </button></p>
+        </div>
+
+        <div class="menu-item" data-id="21" data-name="Santa Fe Black Bean Burger:" data-price="50" data-category="gourmet and specialty burgers">
+            <img src="menu/burger21.jpg" alt="Burger 21">
+            <h2>Santa Fe Black Bean Burger:</h2>
+            <p>A vegetarian black bean patty with avocado, salsa, and pepper jack cheese.</p>
+            <p class="price">₱50.00</p>
+            <p><button class="add-to-cart-button" onclick="addToCart(21, 'Santa Fe Black Bean Burger:', 50)">
+                <span class="icon"><i class="fas fa-plus"></i></span> Add to Cart
+            </button></p>
+        </div>
+
+        <div class="menu-item" data-id="22" data-name="Thai Peanut Chicken Burger:" data-price="50" data-category="fusion and exotic burgers">
+            <img src="menu/burger22.jpg" alt="Burger 22">
+            <h2>Thai Peanut Chicken Burger:</h2>
+            <p>A chicken patty with Thai peanut sauce, shredded cabbage, cilantro, and crushed peanuts.</p>
+            <p class="price">₱50.00</p>
+            <p><button class="add-to-cart-button" onclick="addToCart(22, 'Thai Peanut Chicken Burger:', 50)">
+                <span class="icon"><i class="fas fa-plus"></i></span> Add to Cart
+            </button></p>
+        </div>
+
+        <div class="menu-item" data-id="23" data-name="Jerk Chicken Burger" data-price="50" data-category="fusion and exotic burgers">
+            <img src="menu/burger23.jpg" alt="Burger 23">
+            <h2>Jerk Chicken Burger</h2>
+            <p> A chicken patty marinated in jerk spices, topped with pineapple salsa and jerk mayo.</p>
+            <p class="price">₱50.00</p>
+            <p><button class="add-to-cart-button" onclick="addToCart(23, 'Jerk Chicken Burger', 50)">
+                <span class="icon"><i class="fas fa-plus"></i></span> Add to Cart
+            </button></p>
+        </div>
+
+        <div class="menu-item" data-id="24" data-name="Tex-Mex Black Bean Burger" data-price="50" data-category="fusion and exotic burgers">
+            <img src="menu/burger24.jpg" alt="Burger 24">
+            <h2>Tex-Mex Black Bean Burger</h2>
+            <p>A vegetarian black bean patty with guacamole, salsa, shredded cheese, and lettuce.</p>
+            <p class="price">₱50.00</p>
+            <p><button class="add-to-cart-button" onclick="addToCart(24, 'Tex-Mex Black Bean Burger', 50)">
+                <span class="icon"><i class="fas fa-plus"></i></span> Add to Cart
+            </button></p>
+        </div>
+
+        <div class="menu-item" data-id="25" data-name="Gourmet Veggie Burger" data-price="50" data-category="fusion and exotic burgers">
+            <img src="menu/burger25.jpg" alt="Burger 25">
+            <h2>Gourmet Veggie Burger</h2>
+            <p>A vegetarian burger made with a mix of quinoa, black beans, and roasted vegetables, topped with goat cheese and arugula.</p>
+            <p class="price">₱50.00</p>
+            <p><button class="add-to-cart-button" onclick="addToCart(25, 'Gourmet Veggie Burger', 50)">
+                <span class="icon"><i class="fas fa-plus"></i></span> Add to Cart
+            </button></p>
+        </div>
+
+        <div class="menu-item" data-id="26" data-name="Spinach Feta Chicken Burger:" data-price="50" data-category="fusion and exotic burgers">
+            <img src="menu/burger26.jpg" alt="Burger 26">
+            <h2>Spinach Feta Chicken Burger</h2>
+            <p>A chicken patty with sautéed spinach and crumbled feta cheese.</p>
+            <p class="price">₱50.00</p>
+            <p><button class="add-to-cart-button" onclick="addToCart(26, 'Spinach Feta Chicken Burger:', 50)">
+                <span class="icon"><i class="fas fa-plus"></i></span> Add to Cart
+            </button></p>
+        </div>
+        
+        <div class="menu-item" data-id="27" data-name="Smoky Chipotle Beef Burger:" data-price="50" data-category="unique and creative burgers">
+            <img src="menu/burger27.jpg" alt="Burger 27">
+            <h2>Smoky Chipotle Beef Burger:</h2>
+            <p>A beef burger with smoked gouda, chipotle mayo, and caramelized onions.</p>
+            <p class="price">₱50.00</p>
+            <p><button class="add-to-cart-button" onclick="addToCart(27, 'Smoky Chipotle Beef Burger:', 50)">
+                <span class="icon"><i class="fas fa-plus"></i></span> Add to Cart
+            </button></p>
+
+        </div>
+        
+        <div class="menu-item" data-id="28" data-name="Blueberry Balsamic Beef Burger" data-price="50" data-category="unique and creative burgers">
+            <img src="menu/burger28.jpg" alt="Burger 28">
+            <h2>Blueberry Balsamic Beef Burger</h2>
+            <p> A beef burger with blueberry balsamic reduction, goat cheese, and arugula.</p>
+            <p class="price">₱50.00</p>
+            <p><button class="add-to-cart-button" onclick="addToCart(28, 'Blueberry Balsamic Beef Burger', 50)">
+                <span class="icon"><i class="fas fa-plus"></i></span> Add to Cart
+            </button></p>
+        </div>
+       
+        <div class="menu-item" data-id="29" data-name="Smoked Salmon Bagel Burger" data-price="50" data-category="unique and creative burgers">
+            <img src="menu/burger29.jpg" alt="Burger 29">
+            <h2>Smoked Salmon Bagel Burger</h2>
+            <p>A salmon patty with cream cheese, capers, and red onion on a bagel.</p>
+            <p class="price">₱50.00</p>
+            <p><button class="add-to-cart-button" onclick="addToCart(29, 'Smoked Salmon Bagel Burger', 50)">
+                <span class="icon"><i class="fas fa-plus"></i></span> Add to Cart
+            </button></p>
+        </div>
+
+    </div>
+    <footer>
+        <div class="footer-container">
+
+            <div class="logo">
+                <img src="logo.png" alt="Food Logo">
+            </div>
+
+            <div class="quick-links">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="sampleabout.html">About</a></li>
+                    <li><a href="menu.html">Menu</a></li>
+                    <li><a href="cart.html">Cart</a></li>
+                    <li><a href="#login">Login</a></li>
+                </ul>
+            </div>
+            <div class="social-media">
+    <h3>Connect with Us</h3>
+    <a href="#" target="_blank"><img src="footer/fb.png" alt="Facebook"></a>
+    <a href="#" target="_blank"><img src="footer/twi.png" alt="Twitter"></a>
+    <a href="#" target="_blank"><img src="footer/ins.png" alt="Instagram"></a>
+    <!-- Add more social media icons as needed -->
+</div>
+            <div class="contact-info">
+                <h3>Contact Us</h3>
+                <p>Email: juicyjunction@gmail.com</p>
+                <p>Phone: +1 (555) 123-4567</p>
+                <p>Address: 123 Main Street, Cityville</p>
+            </div>
+        </div>
+    </footer>
+    
+    
+
+    <script>
+        function navigateTo(page) {
+            window.location.href = page;
+        }
+
+        function toggleSearch() {
+            const searchBar = document.querySelector('.search-bar');
+            searchBar.style.display = (searchBar.style.display === 'block') ? 'none' : 'block';
+        }
+
+        function performSearch() {
+            const searchInput = document.querySelector('.search-bar input[type="text"]');
+            const searchTerm = searchInput.value;
+
+            alert('Performing search for: ' + searchTerm);
+        }
+
+        // Function to simulate adding to cart (replace with your actual logic)
+        function addToCart(id, name, price) {
+            const cartItem = { id, name, price, quantity: 1 };
+            const existingCart = JSON.parse(localStorage.getItem('cart')) || [];
+            
+            // Check if the item is already in the cart
+            const existingItem = existingCart.find(item => item.id === id);
+            if (existingItem) {
+                existingItem.quantity += 1; // Increment quantity if item exists
+            } else {
+                existingCart.push(cartItem); // Add new item to the cart
+            }
+
+            localStorage.setItem('cart', JSON.stringify(existingCart));
+            alert('Item added to cart!');
+        }
+
+        function applyFilter() {
+    const filter = document.getElementById('filter').value.toLowerCase();
+    const menuItems = document.querySelectorAll('.menu-item');
+
+    menuItems.forEach(item => {
+        const category = (item.dataset.category || '').toLowerCase();
+
+        if (filter === 'all' || category.includes(filter.toLowerCase())) {
+            item.style.display = 'block';
+        } else {
+            item.style.display = 'none';
+        }
+    });
+}
+
+function performInlineSearch() {
+    const searchInput = document.querySelector('.search-bar-inline input[type="text"]');
+    const searchTerm = searchInput.value.toLowerCase(); // Convert search term to lowercase
+    const menuItems = document.querySelectorAll('.menu-item');
+
+    menuItems.forEach(item => {
+        const itemName = (item.dataset.name || '').toLowerCase(); // Convert item name to lowercase
+        const category = (item.dataset.category || '').toLowerCase();
+
+        if (itemName.includes(searchTerm) || category.includes(searchTerm)) {
+            item.style.display = 'block';
+        } else {
+            item.style.display = 'none';
+        }
+    });
+}
+    </script>
+</body>
+</html>
+

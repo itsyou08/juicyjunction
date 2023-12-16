@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <style>
+         body {
+            margin: 0;
+            padding: 0;
+            font-family: "Century Gothic", Arial, sans-serif;
+            background: linear-gradient(300deg, #44000B,#E0455F);
+        }
+
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 15px;
+            z-index: 1000;
+            display: flex;
+    justify-content: space-between;
+        }
+
+        nav {
+            float: left;
+        }
+
+        nav ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+        }
+
+        nav li {
+            margin-right: 30px;
+        }
+
+        nav a {
+            text-decoration: none;
+        }
+
+        nav button {
+            background: none;
+            border: none;
+            color: white;
+            font-family: "Century Gothic", Arial, sans-serif;
+            font-weight: bold;
+            font-size: 16px;
+            cursor: pointer;
+            position: relative;
+        }
+
+        nav button::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border: 2px solid transparent;
+            transition: border-color 0.3s ease;
+            top: 0;
+            left: 0;
+        }
+
+        nav button:hover::before {
+            border-color: white;
+        }
+
+
+        @keyframes gradient-animation {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+        .menu-container {
+            padding-top: 8%;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .menu-item {
+            background-color: #fff;
+            margin: 20px;
+            padding: 20px;
+            flex-shrink: 0;
+            border-radius: 25px;
+            width: 300px;
+            text-align: center;
+            box-shadow: 0px 0px 20px black;
+            transition: transform .3s;
+        }
+
+        .menu-item:hover {
+            transform: scale(1.1);
+        }
+
+        .menu-item img {
+            width: 100%;
+            max-height: 200px;
+            object-fit: cover;
+            border-radius: 10px;
+            margin-bottom: 10px;
+            box-shadow: 0px 0px 10px black;
+        }
+
+        .menu-item h2 {
+            font-size: 24px;
+            color: #e74c3c;
+        }
+
+        .menu-item p {
+            font-size: 18px;
+            color: #333;
+            margin: 10px 0;
+        }
+
+        .price-icon {
+            margin-right: 5px;
+        }
+        .add-to-cart-button {
+            align-items: center;
+            background-color: #3498db;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 15px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .add-to-cart-button:hover {
+            background-color: #cd1414;
+        }
+
+        .add-to-cart-button .icon {
+            margin-right: 5px;
+        }
+
+        .category-buttons {
+            margin-bottom: 20px;
+        }
+
+        .filter-container {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.filter-container label {
+    font-size: 16px;
+    color: white;
+    margin-right: 10px;
+}
+
+.filter-container select {
+    padding: 8px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    background-color: #362323;
+    color: white;
+    cursor: pointer;
+}
+
+.menu-container {
+    padding-top: 8%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+/* Footer Styles */
+
+footer {
+    background-color: #333;
+    color: #fff;
+    padding: 10px 0;
+}
+
+.footer-container {
+    display: flex;
+    flex-wrap: wrap; /* Allow items to wrap to the next line on smaller screens */
+    justify-content: space-around;
+}
+
+.quick-links,
+.social-media,
+.contact-info,
+.logo {
+    flex: 1;
+    text-align: center;
+    margin-bottom: 20px; /* Add margin for better spacing on smaller screens */
+}
+
+.quick-links ul,
+.social-media a,
+.contact-info p {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.quick-links a,
+.social-media a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 16px;
+    transition: color 0.3s ease;
+}
+
+.quick-links a:hover,
+.social-media a:hover {
+    color: #ffd700; /* Change to your desired hover color */
+}
+
+.social-media img {
+    width: 30px;
+    height: 30px;
+    margin: 0 10px;
+    transition: transform 0.3s ease;
+}
+
+.social-media img:hover {
+    transform: scale(1.2);
+}
+
+.contact-info h3 {
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+.contact-info p {
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+.logo img {
+    width: 100%; /* Make the logo width 100% to adjust according to the container size */
+    height: auto;
+    margin-bottom: 10px;
+    padding-left: 20px;
+}
+
+/* Media Query for smaller screens */
+@media screen and (max-width: 768px) {
+    .footer-container {
+        flex-direction: column; /* Stack items vertically on smaller screens */
+        align-items: center;
+    }
+
+    .logo,
+    .quick-links,
+    .social-media,
+    .contact-info {
+        width: 100%; /* Make each item take full width on smaller screens */
+    }
+
+    .social-media img {
+        margin: 0; /* Remove margin between social media icons on smaller screens */
+    }
+}
+
+    </style>
+
+    <!-- Add this script section for the filter function -->
+    <script>
+function applyFilter() {
+    const filter = document.getElementById('filter').value.toLowerCase();
+    const menuItems = document.querySelectorAll('.menu-item');
+
+    menuItems.forEach(item => {
+        const category = (item.dataset.category || '').toLowerCase(); // Check if item.dataset.category is defined
+
+        if (filter === 'all' || category.includes(filter)) {
+            item.style.display = 'block';
+        } else {
+            item.style.display = 'none';
+        }
+    });
+}
+    </script>
+
+</head>
+<body>
+    <header>
+        <nav>
+          <ul>
+            <li><a href="index.html"><button >Home</button></a></li>
+            <li><a href="sampleabout.html"><button>About</button></a></li>
+            <li><a href="menu.html"><button>Menu</button></a></li>
+            <li><a href="cart.html"><button>Cart</button></a></li>
+            <li><a href="#login"><button>Login</button></a></li>
+          </ul>
+        </nav>
+
+        
+    </header>
+    <div style="text-align: center; color: white; font-size: 44px; padding-top: 100px;">Gourmet and Specialty Burgers</div>
+
+    <div class="menu-container">
+
+        <div class="menu-item" data-id="2" data-name="Veggie Burger" data-price="35" data-category="gourmet and specialty burgers">
+            <img src="menu/burger2.jpg" alt="Burger 2">
+            <h2>Veggie Burger</h2>
+            <p>A vegetarian delight with a patty made from fresh veggies.</p>
+            <p><button class="add-to-cart-button" onclick="addToCart(2, 'Veggie Burger', 35)">
+                <span class="icon"><i class="fas fa-plus"></i></span> Add to Cart
+            </button></p>
+        </div>
+
+        <div class="menu-item" data-id="6" data-name="Spicy Jalapeño Burger" data-price="55" data-category="gourmet and specialty burgers">
+            <img src="menu/burger6.jpg" alt="Burger 6">
+            <h2>Spicy Jalapeño Burger</h2>
+            <p>Beef patty, pepper jack cheese, jalapeños, lettuce, tomato, and spicy mayo.</p>
+            <p><button class="add-to-cart-button" onclick="addToCart(6, 'Spicy Jalapeño Burger', 55)">
+                <span class="icon"><i class="fas fa-plus"></i></span> Add to Cart
+            </button></p>
+        </div>
+
+        <div class="menu-item" data-id="7" data-name="Caprese Burger" data-price="66" data-category="gourmet and specialty burgers">
+            <img src="menu/burger7.jpg" alt="Burger 7">
+            <h2>Caprese Burger</h2>
+            <p>Beef or chicken patty, fresh mozzarella, tomato, basil, balsamic glaze, and pesto.</p>
+            <p><button class="add-to-cart-button" onclick="addToCart(7, 'Caprese Burger', 66)">
+                <span class="icon"><i class="fas fa-plus"></i></span> Add to Cart
+            </button></p>
+        </div>
+
+        <div class="menu-item" data-id="14" data-name="Buffalo Blue Turkey Burger" data-price="50" data-category="gourmet and specialty burgers">
+            <img src="menu/burger14.jpg" alt="Burger 14">
+            <h2>Buffalo Blue Turkey Burger</h2>
+            <p>A turkey burger with buffalo sauce, blue cheese crumbles, lettuce, and tomato.</p>
+            <p><button class="add-to-cart-button" onclick="addToCart(14, 'Buffalo Blue Turkey Burger', 50)">
+                <span class="icon"><i class="fas fa-plus"></i></span> Add to Cart
+            </button></p>
+        </div>
+
+        <div class="menu-item" data-id="15" data-name="Bacon Ranch Chicken Burger" data-price="50" data-category="gourmet and specialty burgers">
+            <img src="menu/burger15.jpg" alt="Burger 15">
+            <h2>Bacon Ranch Chicken Burger</h2>
+            <p>A chicken patty with bacon, ranch dressing, lettuce, and tomato.</p>
+            <p><button class="add-to-cart-button" onclick="addToCart(15, 'Bacon Ranch Chicken Burger', 50)">
+                <span class="icon"><i class="fas fa-plus"></i></span> Add to Cart
+            </button></p>
+        </div>
+       
+        <div class="menu-item" data-id="16" data-name="Apple Cheddar Turkey Burger" data-price="50" data-category="gourmet and specialty burgers">
+            <img src="menu/burger16.jpg" alt="Burger 16">
+            <h2>Apple Cheddar Turkey Burger</h2>
+            <p>A turkey burger with sharp cheddar cheese, sliced apples, and honey mustard.</p>
+            <p><button class="add-to-cart-button" onclick="addToCart(16, 'Apple Cheddar Turkey Burger', 50)">
+                <span class="icon"><i class="fas fa-plus"></i></span> Add to Cart
+            </button></p>
+        </div>
+       
+        <div class="menu-item" data-id="17" data-name="Garlic Parmesan Chicken Burger" data-price="50" data-category="gourmet and specialty burgers">
+            <img src="menu/burger17.jpg" alt="Burger 17">
+            <h2>Garlic Parmesan Chicken Burger</h2>
+            <p> A chicken patty with garlic aioli, Parmesan cheese, and arugula.</p>
+            <p><button class="add-to-cart-button" onclick="addToCart(17, 'Garlic Parmesan Chicken Burger', 50)">
+                <span class="icon"><i class="fas fa-plus"></i></span> Add to Cart
+            </button></p>
+        </div>
+       
+        <div class="menu-item" data-id="18" data-name="Hawaiian BBQ Bacon Burger" data-price="50" data-category="gourmet and specialty burgers">
+            <img src="menu/burger18.jpg" alt="Burger 18">
+            <h2>Hawaiian BBQ Bacon Burger</h2>
+            <p>A beef burger with pineapple, bacon, Swiss cheese, and barbecue sauce.</p>
+            <p><button class="add-to-cart-button" onclick="addToCart(18, 'Hawaiian BBQ Bacon Burger', 50)">
+                <span class="icon"><i class="fas fa-plus"></i></span> Add to Cart
+            </button></p>
+        </div>
+
+        <div class="menu-item" data-id="19" data-name="Jalapeño Popper Turkey Burger: " data-price="50" data-category="gourmet and specialty burgers">
+            <img src="menu/burger19.jpg" alt="Burger 19">
+            <h2>Jalapeño Popper Turkey Burger: </h2>
+            <p>A turkey burger with jalapeño cream cheese, jalapeño slices, and crispy bacon.</p>
+            <p><button class="add-to-cart-button" onclick="addToCart(19, 'Jalapeño Popper Turkey Burger: ', 50)">
+                <span class="icon"><i class="fas fa-plus"></i></span> Add to Cart
+            </button></p>
+        </div>
+
+        <div class="menu-item" data-id="20" data-name="Teriyaki Ginger Veggie Burger" data-price="50" data-category="gourmet and specialty burgers">
+            <img src="menu/burger20.jpg" alt="Burger 20">
+            <h2>Teriyaki Ginger Veggie Burger</h2>
+            <p> A vegetarian burger with teriyaki glaze, ginger-infused mayo, and Asian slaw.</p>
+            <p><button class="add-to-cart-button" onclick="addToCart(20, 'Teriyaki Ginger Veggie Burger', 50)">
+                <span class="icon"><i class="fas fa-plus"></i></span> Add to Cart
+            </button></p>
+        </div>
+
+        <div class="menu-item" data-id="21" data-name="Santa Fe Black Bean Burger:" data-price="50" data-category="gourmet and specialty burgers">
+            <img src="menu/burger21.jpg" alt="Burger 21">
+            <h2>Santa Fe Black Bean Burger:</h2>
+            <p>A vegetarian black bean patty with avocado, salsa, and pepper jack cheese.</p>
+            <p><button class="add-to-cart-button" onclick="addToCart(21, 'Santa Fe Black Bean Burger:', 50)">
+                <span class="icon"><i class="fas fa-plus"></i></span> Add to Cart
+            </button></p>
+        </div>
+        
+
+    </div>
+    <footer>
+        <div class="footer-container">
+
+            <div class="logo">
+                <img src="logo.png" alt="Food Logo">
+            </div>
+
+            <div class="quick-links">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="sampleabout.html">About</a></li>
+                    <li><a href="menu.html">Menu</a></li>
+                    <li><a href="cart.html">Cart</a></li>
+                    <li><a href="#login">Login</a></li>
+                </ul>
+            </div>
+            <div class="social-media">
+    <h3>Connect with Us</h3>
+    <a href="#" target="_blank"><img src="footer/fb.png" alt="Facebook"></a>
+    <a href="#" target="_blank"><img src="footer/twi.png" alt="Twitter"></a>
+    <a href="#" target="_blank"><img src="footer/ins.png" alt="Instagram"></a>
+    <!-- Add more social media icons as needed -->
+</div>
+            <div class="contact-info">
+                <h3>Contact Us</h3>
+                <p>Email: juicyjunction@gmail.com</p>
+                <p>Phone: +1 (555) 123-4567</p>
+                <p>Address: 123 Main Street, Cityville</p>
+            </div>
+        </div>
+    </footer>
+    
+    
+
+    <script>
+        function navigateTo(page) {
+            window.location.href = page;
+        }
+
+        function toggleSearch() {
+            const searchBar = document.querySelector('.search-bar');
+            searchBar.style.display = (searchBar.style.display === 'block') ? 'none' : 'block';
+        }
+
+        function performSearch() {
+            const searchInput = document.querySelector('.search-bar input[type="text"]');
+            const searchTerm = searchInput.value;
+
+            alert('Performing search for: ' + searchTerm);
+        }
+
+        // Function to simulate adding to cart (replace with your actual logic)
+        function addToCart(id, name, price) {
+            const cartItem = { id, name, price, quantity: 1 };
+            const existingCart = JSON.parse(localStorage.getItem('cart')) || [];
+            
+            // Check if the item is already in the cart
+            const existingItem = existingCart.find(item => item.id === id);
+            if (existingItem) {
+                existingItem.quantity += 1; // Increment quantity if item exists
+            } else {
+                existingCart.push(cartItem); // Add new item to the cart
+            }
+
+            localStorage.setItem('cart', JSON.stringify(existingCart));
+            alert('Item added to cart!');
+        }
+    </script>
+</body>
+</html>
+

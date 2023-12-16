@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Website</title>
+
+<style>
+
+    header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.7); /* Original background color */
+    padding: 15px;
+    z-index: 1000;
+}
+
+nav {
+    float: left;
+}
+
+nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+}
+
+nav li {
+    margin-right: 30px;
+}
+
+nav a {
+    text-decoration: none;
+}
+
+nav button {
+    background: none;
+    border: none;
+    color: white;
+    font-family: "Arial", sans-serif;
+    font-weight: bold;
+    font-size: 16px;
+    cursor: pointer;
+    position: relative;
+}
+
+nav button::before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border: 2px solid transparent;
+    transition: border-color 0.3s ease;
+    top: 0;
+    left: 0;
+}
+
+nav button:hover::before {
+    border-color: white;
+}
+
+        /* Footer Styles */
+        footer {
+    background-color: #333;
+    color: #fff;
+    padding: 30px 0;
+    width: 100%;
+    top: 73%;
+}
+      body {
+    font-family: "Century Gothic", Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+    color: black;
+}
+
+.see-all-button {
+    background-color: black;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1em;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+    align-items: center;
+    display: block;
+    margin: 110px auto 0; /* Added margin to the top */
+}
+
+.see-all-button:hover {
+    background-color: rgb(210, 65, 65);
+}
+
+.container {
+    max-width: 80%;
+    margin: 0 auto;
+    padding: 20px;
+    text-align: center;
+}
+
+h1 {
+    color: black;
+    font-size: 3.5em;
+    margin-bottom: 20px;
+}
+
+.contact-options {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    margin-top: 10px;
+}
+
+.contact-option {
+    text-align: center;
+    flex: 1;
+    margin: 10px;
+    background-color: #fff;
+    padding: 30px;
+    box-shadow: 0px 0px 20px rgb(164, 159, 159);
+}
+
+.icon {
+    width: 150px;
+    height: 150px;
+    margin-bottom: 20px;
+    transition: transform 0.3s ease-in-out;
+}
+
+.icon:hover {
+    transform: scale(1.1);
+}
+
+.get-in-touch {
+    margin-top: 20px;
+    font-size: 1.2em;
+    color: black;
+}
+
+.operating-hours {
+    margin-top: 30px;
+    text-align: center;
+}
+
+/* Footer Styles */
+
+footer {
+    background-color: #333;
+    color: #fff;
+    padding: 10px 0;
+}
+
+.footer-container {
+    display: flex;
+    flex-wrap: wrap; /* Allow items to wrap to the next line on smaller screens */
+    justify-content: space-around;
+}
+
+.quick-links,
+.social-media,
+.contact-info,
+.logo {
+    flex: 1;
+    text-align: center;
+    margin-bottom: 20px; /* Add margin for better spacing on smaller screens */
+}
+
+.quick-links ul,
+.social-media a,
+.contact-info p {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.quick-links a,
+.social-media a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 16px;
+    transition: color 0.3s ease;
+}
+
+.quick-links a:hover,
+.social-media a:hover {
+    color: #ffd700; /* Change to your desired hover color */
+}
+
+.social-media img {
+    width: 30px;
+    height: 30px;
+    margin: 0 10px;
+    transition: transform 0.3s ease;
+}
+
+.social-media img:hover {
+    transform: scale(1.2);
+}
+
+.contact-info h3 {
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+.contact-info p {
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+.logo img {
+    width: 100%; /* Make the logo width 100% to adjust according to the container size */
+    height: auto;
+    margin-bottom: 10px;
+    padding-left: 20px;
+}
+
+/* Media Query for smaller screens */
+@media screen and (max-width: 768px) {
+    .footer-container {
+        flex-direction: column; /* Stack items vertically on smaller screens */
+        align-items: center;
+    }
+
+    .logo,
+    .quick-links,
+    .social-media,
+    .contact-info {
+        width: 100%; /* Make each item take full width on smaller screens */
+    }
+
+    .social-media img {
+        margin: 0; /* Remove margin between social media icons on smaller screens */
+    }
+}
+
+
+</style>
+</head>
+<body>
+
+    <header>
+        <nav>
+            <ul>
+                <li><a href="index.html"><button>Home</button></a></li>
+                <li><a href="sampleabout.html"><button>About</button></a></li>
+                <li><a href="menu.html"><button>Menu</button></a></li>
+                <li><a href="cart.html"><button>Cart</button></a></li>
+                <li><a href="#login"><button>Login</button></a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="get-in-touch">
+        <button class="see-all-button">SEE ALL QUESTIONS</button>
+    </div>
+
+    <div class="container">
+        <h1>Get in touch</h1>
+
+         <!-- Operating Hours -->
+         <div class="operating-hours">
+            <p><strong>Mon to Fri</strong>: 9 a.m. - 9 p.m. PHT | <strong>Sat to Sun</strong>: 10 a.m. - 6 p.m. PHT</p>
+        </div>
+
+        <!-- Contact Options -->
+        <div class="contact-options">
+            <div class="contact-option">
+                <a href="live-chat-link.html">
+                    <img src="contact/live-chat.png" alt="Live Chat" class="icon">
+                </a>
+                <h3>Live Chat</h3>
+                <p>Connect with us through chat during our business hours.</p>
+            </div>
+            <div class="contact-option">
+                <a href="phone-link.html">
+                    <img src="contact/phone-call.png" alt="Phone" class="icon">
+                </a>
+                <h3>Phone</h3>
+                <p>Call us at <strong>09479320990</strong> if you wat to talk with us</p>
+            </div>
+            <div class="contact-option">
+                <a href="text-link.html">
+                    <img src="contact/text.png" alt="SMS Text" class="icon">
+                </a>
+                <h3>SMS Text</h3>
+                <p>Text us at <strong>09479320990</strong>, and we'll respond during our operating hours.</p>
+            </div>
+            <div class="contact-option">
+                <a href="virtual-shopping-link.html">
+                    <img src="contact/online-shopping.png" alt="Virtual Shopping" class="icon">
+                </a>
+                <h3>Virtual Shopping</h3>
+                <p>Engage in a conversation, live chat, or text with a dedicated personal shopper.</p>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-container">
+
+            <div class="logo">
+                <img src="logo.png" alt="Food Logo">
+            </div>
+
+            <div class="quick-links">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="sampleabout.html">About</a></li>
+                    <li><a href="menu.html">Menu</a></li>
+                    <li><a href="cart.html">Cart</a></li>
+                    <li><a href="#login">Login</a></li>
+                </ul>
+            </div>
+            <div class="social-media">
+    <h3>Connect with Us</h3>
+    <a href="#" target="_blank"><img src="footer/fb.png" alt="Facebook"></a>
+    <a href="#" target="_blank"><img src="footer/twi.png" alt="Twitter"></a>
+    <a href="#" target="_blank"><img src="footer/ins.png" alt="Instagram"></a>
+    <!-- Add more social media icons as needed -->
+</div>
+            <div class="contact-info">
+                <h3>Contact Us</h3>
+                <p>Email: juicyjunction@gmail.com</p>
+                <p>Phone: +1 (555) 123-4567</p>
+                <p>Address: 123 Main Street, Cityville</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
